@@ -12,6 +12,7 @@ class DraggableImageView: UIImageView {
     
     @IBOutlet var containerView: UIView!
     var panGestureRegognizer: UIPanGestureRecognizer!
+    var originalPoint: CGPoint!
     
     override init() {
     
@@ -55,10 +56,41 @@ class DraggableImageView: UIImageView {
     
     func didPan(sender: UIPanGestureRecognizer) {
         
-        if (sender.state == .Changed) {
+        
+        let xDistance = sender.translationInView(self.superview!).x
+        let yDistance = sender.translationInView(self.superview!).y
+        println(yDistance)
+        
+        switch(sender.state) {
+        
+        
+            case .Began:
+                self.originalPoint = self.center
+        
+            case .Ended:
+                self.resetAnimationsAndTransforms()
             
-            let location = sender.locationInView(self.superview)
-            self.center = location
+            case .Changed:
+                let rotationStrength = min(xDistance/320.0, 1.0) as CGFloat
+                let rotationAngel = (2*CGFloat(M_PI)*rotationStrength/16)
+                let scaleStrength = 1 - fabs(rotationStrength)/4
+                let scale = max(scaleStrength, 0.93)
+                self.center = CGPointMake(self.originalPoint.x + xDistance, self.originalPoint.y + yDistance)
+                let transform = CGAffineTransformMakeRotation(rotationAngel)
+                let scaleTransform = CGAffineTransformScale(transform, scale, scale)
+                self.transform = scaleTransform
+        
+            default:
+                break
         }
+    }
+    
+    func resetAnimationsAndTransforms(){
+    
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            
+            self.center = self.originalPoint
+            self.transform = CGAffineTransformMakeRotation(0)
+        })
     }
 }
