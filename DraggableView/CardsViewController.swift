@@ -16,8 +16,9 @@ class CardsViewController: UIViewController, UIViewControllerTransitioningDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        profileImageView = DraggableImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "nav_bar"), forBarMetrics: UIBarMetrics.Default)
+        profileImageView = DraggableImageView(frame: CGRect(x: 0, y: 60, width: view.frame.width, height: 300))
         profileImageView.image = UIImage(named: "timandtina")
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTap:")
         profileImageView.addGestureRecognizer(tapGestureRecognizer)
@@ -66,7 +67,7 @@ class CardsViewController: UIViewController, UIViewControllerTransitioningDelega
     // UIViewControllerAnimatedTransitioning method(s)
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
         
-        return 0.4
+        return 2
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
@@ -75,27 +76,37 @@ class CardsViewController: UIViewController, UIViewControllerTransitioningDelega
         var containerView = transitionContext.containerView()
         var toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as UIViewController!
         var fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as UIViewController!
-        
+        var tempImageView = UIImageView(image: self.profileImageView.image)
+        tempImageView = UIImageView(image: UIImage(named: "nav_bar"))
+        tempImageView.alpha = 0
+        var window = UIApplication.sharedApplication().keyWindow
+        var frame = window.convertRect(self.profileImageView.frame, fromView: self.view)
+        let newFrame = CGRect(x: frame.minX - 10, y: frame.minY - 10, width: frame.width + 50, height: frame.height + 100)
+        tempImageView.frame = newFrame
+        tempImageView.frame = CGRectMake(0, 400, 100, 100)
+
         if (isPresenting) {
-        
+            
             containerView.addSubview(toViewController!.view)
-            toViewController.view.alpha = 0
-            UIView.animateWithDuration(0.4, animations: { () -> Void in
+            //toViewController.view.alpha = 0
+            UIView.animateWithDuration(2, animations: { () -> Void in
                 
-                toViewController!.view.alpha = 1
+                window.addSubview(tempImageView)
                 
             }, completion: { (finished: Bool) -> Void in
                 
                 transitionContext.completeTransition(true)
+                //tempImageView.removeFromSuperview()
             })
         
         } else {
         
-            UIView.animateWithDuration(0.4, animations: { () -> Void in
+            UIView.animateWithDuration(1, animations: { () -> Void in
                 
                 println("stupid swift")
-                fromViewController.view.alpha = 0
-                
+                //fromViewController.view.alpha = 0
+                //self.profileImageView.transform = CGAffineTransformMakeScale(1, 1)
+
                 }, completion: { (finished: Bool) -> Void in
                 
                     transitionContext.completeTransition(true)

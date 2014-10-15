@@ -15,7 +15,29 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zmu-eT-Ue6">
+                                <rect key="frame" x="0.0" y="64" width="600" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="CMg-wZ-ue4"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="action_buttons" translatesAutoresizingMaskIntoConstraints="NO" id="5tL-U7-w20">
+                                <rect key="frame" x="140" y="410" width="320" height="108"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="108" id="IWZ-aw-2yc"/>
+                                    <constraint firstAttribute="width" constant="320" id="zJ7-Nn-qKL"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5tL-U7-w20" firstAttribute="top" secondItem="Zmu-eT-Ue6" secondAttribute="bottom" constant="46" id="67d-CU-I44"/>
+                            <constraint firstItem="Zmu-eT-Ue6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Mgg-TB-PBO"/>
+                            <constraint firstAttribute="trailing" secondItem="Zmu-eT-Ue6" secondAttribute="trailing" id="a8l-kO-irK"/>
+                            <constraint firstItem="Zmu-eT-Ue6" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="wFu-jd-r7D"/>
+                            <constraint firstAttribute="centerX" secondItem="5tL-U7-w20" secondAttribute="centerX" id="xnr-SC-9cE"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NlM-rZ-LEp"/>
                     <connections>
@@ -39,25 +61,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dLj-In-qKn">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="Bw4-AH-LTl"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="dLj-In-qKn" firstAttribute="top" secondItem="Gmj-Ov-lqm" secondAttribute="top" id="J2C-Sv-w09"/>
-                            <constraint firstItem="eWd-6Y-kFF" firstAttribute="top" secondItem="dLj-In-qKn" secondAttribute="bottom" id="Xiw-nI-xSW"/>
-                            <constraint firstAttribute="trailing" secondItem="dLj-In-qKn" secondAttribute="trailing" id="bG0-Yo-7eM"/>
-                            <constraint firstItem="dLj-In-qKn" firstAttribute="leading" secondItem="Gmj-Ov-lqm" secondAttribute="leading" id="vdQ-85-eLQ"/>
+                            <constraint firstItem="dLj-In-qKn" firstAttribute="leading" secondItem="Gmj-Ov-lqm" secondAttribute="leading" id="2AB-x7-OQM"/>
+                            <constraint firstItem="dLj-In-qKn" firstAttribute="top" secondItem="R6Z-WO-4pZ" secondAttribute="bottom" id="W1j-up-HQl"/>
+                            <constraint firstAttribute="trailing" secondItem="dLj-In-qKn" secondAttribute="trailing" id="bvD-dJ-tCC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PZd-4o-8hC">
-                        <barButtonItem key="leftBarButtonItem" title="Done" id="24P-09-N5o">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="ynQ-cc-AOA">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="onDone:" destination="XjS-l2-mro" id="0Gq-NI-fcc"/>
+                                <action selector="onDone:" destination="XjS-l2-mro" id="XPq-d8-nt0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="doneButton" destination="ynQ-cc-AOA" id="BIH-KG-MPd"/>
                         <outlet property="profileImageView" destination="dLj-In-qKn" id="Txf-VG-Xny"/>
                     </connections>
                 </viewController>
@@ -102,4 +128,7 @@
             <point key="canvasLocation" x="2319" y="71"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="action_buttons" width="320" height="108"/>
+    </resources>
 </document>
